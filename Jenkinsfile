@@ -41,5 +41,7 @@ pipeline{
                     ls -lrt
                     sleep 5
                 '''
+            }
+        }
     }
 }
