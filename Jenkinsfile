@@ -1,4 +1,5 @@
 pipeline{
+    agent any
     // agent { label 'slave1 && slave2'}
     // agent { label 'slave1 || slave2'}
     // agent {'!master'}
