@@ -1,7 +1,7 @@
 pipeline{
-    agent {label 'slave1'}
+    agent {label 'master'}
 
-    stages{
+    stages{a
         stage('STAGE1'){
             steps{
                 echo "This is stage1"
