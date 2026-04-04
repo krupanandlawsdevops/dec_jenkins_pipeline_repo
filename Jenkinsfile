@@ -1,7 +1,7 @@
 pipeline{
     // agent { label 'slave1 && slave2'}
-    agent { label 'slave1 || slave2'}
-    // agent {'!master'}
+    // agent { label 'slave1 || slave2'}
+    agent {'!master'}
     
     stages{
         
