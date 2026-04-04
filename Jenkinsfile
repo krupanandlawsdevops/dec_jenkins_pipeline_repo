@@ -6,7 +6,6 @@ pipeline{
     stages{
         
         stage('STAGE1'){
-            agent { label 'slave1'}
 
             steps{
                 echo "This is stage1"
@@ -17,7 +16,7 @@ pipeline{
             }
         }
         stage('Build'){
-            agent { label 'slave2'}
+
             steps{
                 echo "Building Java Code"
                 sh '''
