@@ -1,29 +1,65 @@
-pipeline{
-    agent none
-    // agent { label 'slave1 && slave2'}
-    // agent { label 'slave1 || slave2'}
-    // agent {'!master'}
+// pipeline{
+
+//     // agent { label 'slave1 && slave2'}
+//     // agent { label 'slave1 || slave2'}
+//     // agent {'!master'}
     
-    stages{
+//     stages{
         
-        stage('STAGE1'){
+//         stage('STAGE1'){
 
-            steps{
-                echo "This is stage1"
-                sh '''
-                    sleep 10
-                    echo "This is a linux command"
-                '''
-            }
-        }
-        stage('Build'){
+//             steps{
+//                 echo "This is stage1"
+//                 sh '''
+//                     sleep 10
+//                     echo "This is a linux command"
+//                 '''
+//             }
+//         }
+//         stage('Build'){
 
-            steps{
-                echo "Building Java Code"
-                sh '''
-                    #!/bin/bash
-                    sleep 10
-                '''
+//             steps{
+//                 echo "Building Java Code"
+//                 sh '''
+//                     #!/bin/bash
+//                     sleep 10
+//                 '''
+//             }
+//         }
+//     }
+// }
+
+pipeline {
+    agent none
+
+    stages {
+        stage('Run on both nodes') {
+            parallel {
+
+                stage('Run on slave1') {
+                    agent { label 'slave1' }
+                    steps {
+                        echo "Running on slave1"
+                        sh '''
+                            sleep 10
+                            echo "This is a linux command"
+                            hostname
+                        '''
+                    }
+                }
+
+                stage('Run on slave2') {
+                    agent { label 'slave2' }
+                    steps {
+                        echo "Running on slave2"
+                        sh '''
+                            sleep 10
+                            echo "Building Java Code"
+                            hostname
+                        '''
+                    }
+                }
+
             }
         }
     }
