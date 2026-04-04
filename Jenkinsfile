@@ -11,7 +11,7 @@ pipeline{
                 '''
             }
         }
-        stage('STAGE2'){
+        stage('Build'){
             steps{
                 echo "Building Java Code"
                 sh '''
