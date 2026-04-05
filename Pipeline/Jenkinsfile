@@ -1,0 +1,77 @@
+pipeline{
+
+    agent any
+
+    environment{
+        DOCKER_USER = 'krupanand'
+        AWS_ACCESS_KEY = '1234567890'
+    }
+    
+    stages{
+        
+        stage('STAGE1'){
+            
+            environment{
+                STAGE = 'stage1'
+            }
+
+            steps{
+                echo "DOCKER_USER : ${env.DOCKER_USER}"
+                echo "AWS_ACCESS_KEY : ${env.AWS_ACCESS_KEY}"
+                echo "STAGE: ${env.STAGE}"
+
+                sh'''
+                    env
+                '''
+            }
+        }
+
+        stage('STAGE2'){
+            steps  {
+                echo "DOCKER_USER : ${env.DOCKER_USER}"
+                echo "AWS_ACCESS_KEY : ${env.AWS_ACCESS_KEY}"
+                echo "STAGE: ${env.STAGE}"
+
+                sh'''
+                    env
+                '''
+            }
+        }
+    }
+}
+
+// pipeline {
+//     agent none
+
+//     stages {
+//         stage('Run on both nodes') {
+//             parallel {
+
+//                 stage('Run on slave1') {
+//                     agent { label 'slave1' }
+//                     steps {
+//                         echo "Running on slave1"
+//                         sh '''
+//                             sleep 10
+//                             echo "This is a linux command"
+//                             hostname
+//                         '''
+//                     }
+//                 }
+
+//                 stage('Run on slave2') {
+//                     agent { label 'slave2' }
+//                     steps {
+//                         echo "Running on slave2"
+//                         sh '''
+//                             sleep 10
+//                             echo "Building Java Code"
+//                             hostname
+//                         '''
+//                     }
+//                 }
+
+//             }
+//         }
+//     }
+// }
