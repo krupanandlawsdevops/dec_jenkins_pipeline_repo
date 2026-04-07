@@ -1,39 +1,36 @@
 pipeline{
     agent any
-
-    environment{
-        DOCKER_USER = 'krupanand'
-        AWS_ACCESS_KEY = '1234567890'
-    }
     
     stages{
-        
         stage('STAGE1'){
-            
-            environment{
-                STAGE = 'stage1'
-            }
-
             steps{
-                echo "DOCKER_USER : ${env.DOCKER_USER}"
-                echo "AWS_ACCESS_KEY : ${env.AWS_ACCESS_KEY}"
-                echo "STAGE: ${env.STAGE}"
-
-                sh'''
-                    env
-                '''
+                echo "This is stage 1 running"
+                sh 'sleep 5'
             }
         }
 
-        stage('STAGE2'){
-            steps  {
-                echo "DOCKER_USER : ${env.DOCKER_USER}"
-                echo "AWS_ACCESS_KEY : ${env.AWS_ACCESS_KEY}"
-                echo "STAGE: ${env.STAGE}"
+        stage('PARALLEL TESTING'){
+            parallel {
+                stage('WINDOWS TESTING') {
+                    steps{
+                        echo "This is windows testing running"
+                        sh 'sleep 10'
+                    }  
+                }
 
-                sh'''
-                    env
-                '''
+                stage('MAC TESTING') {
+                    steps{
+                        echo "This is mac testing running"
+                        sh 'sleep 10'
+                    }  
+                }
+            }
+        }
+
+        stage('FINAL'){
+            steps{
+                echo 'This is final running'
+                sh 'sleep 5'
             }
         }
     }
