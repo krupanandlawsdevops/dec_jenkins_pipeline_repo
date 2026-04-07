@@ -11,9 +11,9 @@ pipeline{
                 '''
             }
         }
-        stage('STAGE2'){
+        stage('Build'){
             steps{
-                echo "This is stage 2"
+                echo "Building Java Code"
                 sh '''
                     #!/bin/bash
                     pwd
