@@ -18,10 +18,9 @@ pipeline{
             steps{
                 script{
                     try{
-                        echo "This is stage 1b running"
-                        sh '''
-                            sleep 5
-                            exit 1
+                        sh'''
+                        sleep 5
+                        exit 1
                         '''
                     }
                     catch(err){
