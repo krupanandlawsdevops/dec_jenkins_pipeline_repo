@@ -2,7 +2,7 @@ pipeline{
     agent any
     
     stages{
-        stage('STAGE1_a'){
+        stage('STAGE1'){
             steps{
                 catchError(buildResult :'Success', stageResult : 'FAILURE'){
                     echo "This is stage 1 running"
@@ -11,25 +11,6 @@ pipeline{
                         exit 1
                     '''
                     }
-            }
-        }
-
-        stage('STAGE1_b'){
-            steps{
-                script{
-                    try{
-                        echo "This is stage 1b running"
-                        sh '''
-                            sleep 5
-                            exit 1
-                        '''
-                    }
-                    catch(err){
-                        echo "Error caught : ${err)}"
-                        currentBuild.result = 'SUCCESS'
-                    }
-                }
-                    
             }
         }
 
